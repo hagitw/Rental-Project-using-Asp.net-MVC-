@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            background-image: url(/Images/Popcorn-Time.jpg1.jpg);
+            background-size: 100%;
+        }
+
+        #header {
+            width: 100%;
+            height: 300px;
+            margin-top: 10px;
+        }
+
+        a {
+            background: rgba(255, 255, 255, 0.31);
+            font-size: 50px;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            text-align: center;
+            padding: 15px;
+            margin-left: 20px;
+        }
+            a:hover, a:active {
+                font-size: 500%;
+            }
+        #footer {
+            color: white;
+            font-size: 30px;
+            position: absolute;
+            top: 90%;
+        }
+    </style>
+</head>
+<body>
+    <p id="header">
+        <a href="/Home/Index">Home</a>
+        <a href="~/Movie/Index">Movies</a>
+        <a href="~/Customer/Index">Customer</a>
+        <a href="~/Rental/Index">Rentals</a>
+    </p>
+
+    @RenderBody()
+
+    <p id="footer">&#64; 2017 Tec-Career Movie Rental</p>
+</body>
+</html>
