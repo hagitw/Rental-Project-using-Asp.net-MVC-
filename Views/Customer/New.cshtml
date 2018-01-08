@@ -1,0 +1,95 @@
+﻿
+@{
+    Layout = "~/Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>New</title>
+    <style>
+        input {
+            width: 150px;
+            height: 25px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        select {
+            width: 165px;
+            height: 35px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        form {
+            width: 400px;
+            margin-left: 40%;
+            margin-top: -180px;
+            background-color: black;
+            text-align: center;
+            padding-top: 10px;
+            color: #ff7087;
+            font-size: 30px;
+            padding: 10px;
+        }
+
+        #idnputsub {
+            width: 200px;
+            height: 50px;
+            font-size: 30px;
+            border-radius: 5px;
+            padding: 3px;
+        }
+
+            #idnputsub:hover {
+                background-color: white;
+                color: #ff7087;
+            }
+    </style>   
+</head>
+<body>
+    <form method="post" onsubmit="return CheckValues()" action="/Customer/SaveCustomer">
+        Name : <br />
+        <input id="idname" type="text" name="customer.Name" /><br />
+        <p>@TempData["name"]</p>
+        Subscription : <br />
+        <select id="idsubscription" name="customer.Subscription">
+            <option selected></option>
+            <option>Pay as you go</option>
+            <option>Monthly</option>
+            <option>Annual</option>
+            <option>Quarterly</option>
+        </select>
+        <p>@TempData["subscription"]</p>
+        <br />
+        Age : <br /><input type="number" id="idage" name="customer.Age" step="1" /><br /><br />
+        <p>@TempData["age"]</p>
+        <p id="errormessage">@TempData["message"]</p>
+        <input id="idnputsub" type="submit" value="Add Customer" />
+    </form>
+    <script>
+        function CheckValues()
+        {
+            var result = true;
+            var age = document.getElementById("idage").value;
+            var ValidName = document.getElementById("idname").value != "";
+            var ValidSubscription = document.getElementById("idsubscription").value != "";
+            var ValidAge = document.getElementById("idage").value != "";
+            if (!ValidName || !ValidSubscription || !ValidAge)
+            {
+                document.getElementById("errormessage").innerHTML = "Please complete all fields";
+                result = false;
+            }
+           else if (age < 18)
+            {
+                document.getElementById("errormessage").innerHTML = "please insert age bigger than 18";
+                result = false;}
+            return (result);
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿@model List<Customer>
+
+@{
+    Layout = "~/Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        th {
+            font-size: 50px;
+            color: rgb(0, 228, 255);
+        }
+
+        td {
+            font-size: 30px;
+            text-align: center;
+            color: #e8e8ea;
+        }
+
+        .tab {
+            margin-left: 30%;
+            margin-top: -150px;
+            text-align: center;
+            padding-top: 10px;
+            background-color: black;
+            width: 600px;
+            height: 600px;
+            border: 5px solid #888888;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #ida {
+            background: rgba(255, 255, 255, 0.31);
+            font-size: 50px;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            text-align: center;
+            background-color: black;
+            margin-left: 38%;
+            border: 5px solid #888888;
+            border-radius: 5px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+    <table class="tab">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Age</th>
+        </tr>
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Subscription</td>
+                <td>@item.Age</td>
+            </tr>
+        }
+
+    </table>
+    <a id="ida" href="/Customer/New">Add Customers</a>
+</body>
+</html>

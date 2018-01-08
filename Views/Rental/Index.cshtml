@@ -1,0 +1,97 @@
+﻿@model List<Movie>
+@{
+    Layout = "~/Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        input ,option {
+            width: 150px;
+            height: 25px;
+            margin: 5px;
+            padding: 5px;
+            text-shadow: 2px 2px 30px #ff0000
+        }
+        div {
+            width: 500px;
+            margin-left: 30%;
+            margin-top: -180px;
+            background-color: rgba(0, 0, 0, 0.55);
+            text-align: center;
+            padding-top: 10px;
+            color: #ffffff;
+            font-size: 30px;
+            padding: 10px;
+        }
+        #idnputsub {
+            width: 200px;
+            height: 50px;
+            font-size: 30px;
+            border-radius: 5px;
+            padding: 3px;
+        }
+            #idnputsub:hover {
+                background-color: white;
+                color: #ff7087;
+            }   
+    </style>
+</head>
+<body>
+    <div>
+      Customer Name : <br /><input type="text" name="customerN" id="idname" /><br />
+        <p id="erroename"></p>
+        Movie Name :<br /><select id="idmovie" name="movie">
+            <option selected></option>
+            @foreach (var movie in Model)
+            {
+                <option>@movie.Name</option>
+            }
+        </select><br />
+        <p id="errormovie"></p>
+        <button id="idnputsub" onclick="FiledEmpty()">Rental</button>
+        <p id="ajaxrespont"></p>
+    </div>
+    <script>
+           function RentalMovie() {
+               var xhttp = new XMLHttpRequest();
+               xhttp.onreadystatechange = function () {
+                   if (this.readyState === 4 && this.status === 200) {
+
+                       var jsonanswer = JSON.parse(this.responseText);
+                       if (jsonanswer.ajaxactoin) {
+                           document.getElementById("ajaxrespont").style.color = "green";
+                           document.getElementById("ajaxrespont").innerHTML = jsonanswer.message;
+                       }
+                       else {
+                           document.getElementById("ajaxrespont").style.color = "red";
+                           document.getElementById("ajaxrespont").innerHTML = jsonanswer.message;
+                       }
+                   }
+               };
+               var name = document.getElementById("idname").value;
+               var movie = document.getElementById("idmovie").value;
+               var url = "/Rental/AddNewRental?customerN=" + name + "&movie=" + movie;
+               xhttp.open("Post", url);
+               xhttp.send();
+           }
+
+           function FiledEmpty() {
+                var name = document.getElementById("idname").value;
+                var movie = document.getElementById("idmovie").value;
+
+                if (name == "") { document.getElementById("erroename").innerHTML = "Please complete this field"; }
+                else { document.getElementById("erroename").innerHTML = ""; }
+               if (movie == "") { document.getElementById("errormovie").innerHTML = "Please complete this field"; }
+               else { document.getElementById("errormovie").innerHTML = ""; }
+               if (name != "" & movie != "") {
+               RentalMovie();
+           }
+
+
+    </script>
+</body>
+</html>

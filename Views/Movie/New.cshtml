@@ -1,0 +1,81 @@
+﻿@{ 
+    Layout = "~/Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>New</title>
+    <style>
+        input {
+            width: 150px;
+            height: 25px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        select {
+            width: 165px;
+            height: 35px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        form {
+            width: 400px;
+            margin-left: 38%;
+            margin-top: -50px;
+            background-color: black;
+            text-align: center;
+            padding-top: 10px;
+            color: #ffb74b;
+            font-size: 30px;
+        }
+
+        #idnputsub {
+            width: 200px;
+            height: 50px;
+            font-size: 30px;
+        }
+
+            #idnputsub:hover {
+                background-color: white;
+                color: #ffb74b;
+            }
+    </style>
+</head>
+<body>
+    <form method="post" onsubmit="return CheckValues()" action="/Movie/SaveMovie">
+        Name: <br />
+        <input type="text" id="MovieName" name="MovieName" /><br />
+        <p>@ViewBag.ErrorMessageName</p>
+        Category : <br />
+        <select id="category" name="Category">
+            <option selected></option>
+            <option>Action</option>
+            <option>Comedy</option>
+            <option>Romance</option>
+            <option>Family</option>
+        </select><br /><br />
+        <p>@ViewBag.ErrorMessageCategory</p>
+        <p id="errormessage">@ViewBag.ErrorMessage</p>
+        <input id="idnputsub" type="submit" value="Add Movie"/>
+    </form>
+
+
+    <script>
+        function CheckValues() {
+            var result = true;
+            //var name = document.getElementById("MovieName").value != "";
+            //var category = document.getElementById("Category").value != "";
+            //if (!name || !category) {
+            //    document.getElementById("errormessage").innerHTML = "Please complete all fields";
+            //    result = false;
+            //}
+            return result;
+        }
+
+    </script>
+</body>
+</html>
